@@ -1,0 +1,26 @@
+@import './vars.scss';
+
+@mixin standart-font {
+  font-size: $fontSize;
+  line-height: $lineHeightNormal;
+}
+
+%between {
+  display: flex;
+  justify-content: space-between;
+}
+
+%centrer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+%opacible {
+  opacity: 1;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}

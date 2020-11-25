@@ -1,0 +1,97 @@
+@import "../../css/vars.scss";
+@import "../../css/funcs.scss";
+
+.catalog-page {
+  .config {
+    padding-top: 10px;
+    border-bottom: 2px solid #888;
+  }
+}
+
+.catalog-page .catalog-page__content {
+  .catalog-page__categories {
+    padding: 10px;
+    font-size: 18px;
+  }
+
+  .catalog-page__categories-item {
+    padding: 3px;
+    @extend %opacible;
+    word-break: break-all;
+
+    a {
+      display: inline-block;
+      width: 100%;
+    }
+  }
+
+  .catalog-page__catalog {
+  }
+
+  .pagination {
+    @extend %between;
+  }
+}
+
+.catalog-page .catalog-page__catalog {
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    min-height: 160px;
+
+    .card {
+      flex: 1 1 180px;
+      margin: 5px;
+      max-width: calc(50% - 10px);
+    }
+  }
+}
+
+a.categories__toggler {
+  display: none;
+}
+
+@media (max-width: 964px) {
+  .catalog-page .catalog-page__catalog {
+    .cards .card {
+      flex: 1 1 270px;
+      margin: 5px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .catalog-page .catalog-page__catalog {
+    .cards .card {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  a.categories__toggler {
+    display: inline-block;
+  }
+
+  .catalog-page__categories {
+    display: none;
+  }
+
+  .catalog-page .catalog-page__categories-item a{
+    display: block;
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+  }
+  .catalog-page .catalog-page__categories-item a.active{
+    color: white;
+    background-color: #08f;
+  }
+  .catalog-page .catalog-page__categories-item:not(:last-child){
+    border-bottom: 1px solid #08f;
+  }
+
+  .row div.col.s10.catalog-page__catalog {
+      width: 100%;
+  }
+}

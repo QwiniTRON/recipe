@@ -1,0 +1,19 @@
+@import '../../css/vars.scss';
+@import '../../css/funcs.scss';
+
+.login-form {
+  max-width: 80vw;
+  margin: 0 auto;
+}
+
+.form-error {
+  color: $dangerColor;
+}
+
+.login-form_error {
+  @extend .form-error;
+}
+
+.login-form__btns {
+  @extend %between;
+}

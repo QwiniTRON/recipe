@@ -1,0 +1,23 @@
+.dashboard {
+  .menu {
+    background-color: #ddd;
+    padding: 5px;
+    margin-bottom: 10px;
+
+    a {
+      display: inline-block;
+      margin: 0 10px;
+      font-size: 16px;
+    }
+    a.active {
+      color: #333;
+      border-bottom: 3px solid #08f;
+    }
+  }
+}
+
+.dashboard .dashboard-info {
+  .dashboard-info__text {
+    font-size: 16px;
+  }
+}

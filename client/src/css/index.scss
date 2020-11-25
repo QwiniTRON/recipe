@@ -1,0 +1,75 @@
+@import "vars.scss";
+@import "funcs.scss";
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: $fontSize;
+  line-height: $lineHeightNormal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+button {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+.full-width {
+  flex-grow: 1;
+  width: 100%;
+}
+
+.m10 {
+  margin: 10px;
+}
+
+.mv10 {
+  margin: 10px 0;
+}
+
+.accentet {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.app_layout {
+  padding-top: $headerHeight;
+}
+
+.betweened {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tac {
+  text-align: center;
+}
+
+.bordered {
+  border: $borderSize solid $neutralColor;
+}
+
+.p5 {
+  padding: 5px;
+}
+
+.m5 {
+  margin: 5px;
+}

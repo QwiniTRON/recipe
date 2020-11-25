@@ -1,0 +1,30 @@
+.recipe-page {
+  padding: 5px;
+
+  .title {
+    text-align: center;
+  }
+
+  .recipe-page__img img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .recipe-page__text {
+    line-height: 1.5;
+    font-size: 16px;
+  }
+
+  .recipe-page__btn button{
+    margin-right: 5px;
+  }
+}
+
+.recipe-page .ingridients {
+  padding: 5px;
+  font-size: 18px;
+
+  .ingridients__item {
+    padding: 5px 0;
+  }
+}

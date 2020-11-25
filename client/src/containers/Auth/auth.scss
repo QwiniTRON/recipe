@@ -1,0 +1,21 @@
+@import '../../css/vars.scss';
+
+.authPage {
+  padding: 5px;
+
+  .authPage__title {
+    text-align: center;
+  }
+
+  .authPage__error {
+    color: $accentColor;
+    text-align: center;
+  }
+
+  .authPage__succes-register {
+    color: $succesColor;
+    text-align: center;
+    text-shadow: 0 0 2px #000;
+    font-size: 18px;
+  }
+}

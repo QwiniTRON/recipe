@@ -1,0 +1,36 @@
+{
+  "name": "cursovaya",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "client": "npm run start --prefix client",
+    "server:dev": "nodemon app.js",
+    "server": "node app.js",
+    "client:build": "npm run build --prefix client",
+    "client:install": "npm install --prefix client",
+    "server:install": "npm install",
+    "all:install": "concurrently \"server:install\" \"client:install\"",
+    "start": "concurrently \"server:dev\" \"client\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.17.8",
+    "@types/express-session": "^1.17.1",
+    "@types/multer": "^1.4.4",
+    "@types/passport": "^1.0.4",
+    "concurrently": "^5.3.0",
+    "connect-pg-simple": "^6.2.1",
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "express-validator": "^6.6.1",
+    "multer": "^1.4.2",
+    "nodemon": "^2.0.6",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "pg-promise": "^10.7.3"
+  }
+}

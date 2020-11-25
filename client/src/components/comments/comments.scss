@@ -1,0 +1,17 @@
+.comment-form {
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+.comments {
+  .comments__notice {
+    text-align: center;
+    font-weight: bold;
+  }
+
+ .comment {
+   border: 2px solid #ccc;
+   padding: 5px;
+   margin: 5px 0;
+ }
+}

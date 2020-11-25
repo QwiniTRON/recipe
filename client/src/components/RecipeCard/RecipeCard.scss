@@ -1,0 +1,18 @@
+.recipe-card {
+  display: inline-flex;
+  vertical-align: top;
+  flex-direction: column;
+  padding: 4px;
+  text-align: center;
+
+  img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    height: 150px;
+  }
+
+  .recipe-card__text {
+    flex-grow: 1;
+  }
+}
