@@ -84,7 +84,7 @@ const Header: React.FC<HeaderProps> = ({ isAuth, categories, nickname, userStatu
           <NavLink onClick={closeSideMenu} to="/auth" className="waves-effect haeader__side-item">войти</NavLink>
         </li>}
 
-        <li><a onClick={closeSideMenu} className="waves-effect nav__closer">&times;</a></li>
+        <li onClick={closeSideMenu}><a className="waves-effect nav__closer">&times;</a></li>
       </ul>
 
       {isExitModal && <Modal clickHandle={() => setIsExitModal(false)}>

@@ -21,7 +21,7 @@ import { Req } from '../../req/Req';
 import { RootState } from '../main';
 
 export const recipesOnPage = 4;
-const defaultHost = 'http://localhost:3000';
+const defaultHost = 'http://localhost';
 
 export function recipeSetLoading(loading: boolean): recipeAction {
   return {
@@ -140,8 +140,8 @@ export function getRecipes(
       // загружаем
       dispatch(recipeSetLoading(true));
       dispatch(recipeClearForFetch());
-      const recipesReq = await Req.get(url.href);
-
+      const recipesReq = await Req.get(url.pathname + url.search);
+      
       if (recipesReq.ok) {
         dispatch(recipeSetRecipes(recipesReq.recipes, recipesReq.count));
       }
@@ -168,7 +168,7 @@ export function getRecipesNext(
 
       // загружаем
       dispatch(recipeSetLoading(true));
-      const recipesReq = await Req.get(url.href);
+      const recipesReq = await Req.get(url.pathname + url.search);
 
       if (recipesReq.ok) {
         dispatch(recipeSetRecipes(recipesReq.recipes, recipesReq.count));
@@ -197,7 +197,7 @@ export function getRecipesBack(
 
       // загружаем
       dispatch(recipeSetLoading(true));
-      const recipesReq = await Req.get(url.href);
+      const recipesReq = await Req.get(url.pathname + url.search);
 
       if (recipesReq.ok) {
         dispatch(recipeSetRecipes(recipesReq.recipes, recipesReq.count));
@@ -219,7 +219,7 @@ export function getOneRecipe(
       const url = new URL('/api/recipe/one/' + recipeId, defaultHost);
 
       dispatch(recipeSetLoading(true));
-      const recipeReq = await Req.get(url.href);
+      const recipeReq = await Req.get(url.pathname + url.search);
 
 
       if (recipeReq.ok) {
@@ -243,7 +243,7 @@ export function createComment(
     try {
       const url = new URL('/api/recipe/comment', defaultHost);
 
-      const commentReq = await Req.post(url.href, {
+      const commentReq = await Req.post(url.pathname + url.search, {
         text,
         recipeId
       });
