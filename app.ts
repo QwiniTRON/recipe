@@ -6,14 +6,14 @@ import session from 'express-session';
 import db from './db/connect';
 const cookieParser = require('cookie-parser');
 import { userRouter } from './routes/user';
-import {recipeRpouter} from './routes/recipe';
+import { recipeRpouter } from './routes/recipe';
 
 
 const app: express.Application = express();
 
 app.use('/imgs', express.static(path.resolve(__dirname, 'imgs')));
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 const sessionStore = new (require('connect-pg-simple')(session))({
   pgPromise: db
@@ -39,23 +39,18 @@ app.use(passport.session());
 app.use('/api/auth', userRouter);
 app.use('/api/recipe', recipeRpouter);
 
-app.use((req: express.Request, res: express.Response) => {
-  res.status(404).send({ ok: false, message: 'Invalid request' })
-})
-
-if (process.env.NODE_ENV === "production") {
-  app.use("/", express.static(path.join(__dirname, 'client', 'build')));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-  });
-}
+// отдача клиента
+app.use("/", express.static(path.join(__dirname, 'client', 'build')));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+});
 
 app.use(function (err: any, req: express.Request, res: express.Response, next: Function) {
   console.error(err);
   res.status(500).send('Something broke!');
 });
 
-app.listen(keys.PORT, () => {
 
+app.listen(keys.PORT, () => {
+  console.log('listen on port ' + keys.PORT);
 });

@@ -13,7 +13,6 @@ import * as serviceWorker from './serviceWorker';
 import './css/index.scss';
 import './libs/fontAwesome/all.css';
 import './libs/materialize/materialize.css';
-import './libs/materialize/materialize.min.js';
 
 const composeEnhancers =
   typeof window === 'object' &&

@@ -37,18 +37,15 @@ app.use(passport_1.default.session());
 // routes
 app.use('/api/auth', user_1.userRouter);
 app.use('/api/recipe', recipe_1.recipeRpouter);
-app.use(function (req, res) {
-    res.status(404).send({ ok: false, message: 'Invalid request' });
+// отдача клиента
+app.use("/", express_1.default.static(path_1.default.join(__dirname, 'client', 'build')));
+app.get("*", function (req, res) {
+    res.sendFile(path_1.default.resolve(__dirname, 'client', 'build', 'index.html'));
 });
-if (process.env.NODE_ENV === "production") {
-    app.use("/", express_1.default.static(path_1.default.join(__dirname, 'client', 'build')));
-    app.get("*", function (req, res) {
-        res.sendFile(path_1.default.resolve(__dirname, 'client', 'build', 'index.html'));
-    });
-}
 app.use(function (err, req, res, next) {
     console.error(err);
     res.status(500).send('Something broke!');
 });
 app.listen(default_1.default.PORT, function () {
+    console.log('listen on port ' + default_1.default.PORT);
 });
