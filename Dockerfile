@@ -1,4 +1,4 @@
-FROM node:14.15
+FROM node:12.17.0-alpine
 
 ENV BUILD_PATH /usr/src/app
 
