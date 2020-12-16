@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { useHistory } from 'react-router-dom';
 
 import './createRecipe.scss';
+
 import { RootState } from '../../store/main';
 import { Category } from '../../store/types';
 import { BreadCramps } from '../../components/BreadCramps/BreadCramps';
@@ -60,7 +61,7 @@ const CreateRecipe: React.FC<CreateRecipeType> = ({ categories }) => {
         data.append('photo', file, file.name);
         values.ingridiens.forEach(ing => data.append('ingridiens', ing));
 
-        fetch('/api/recipe/create', {
+        fetch('/api/recipe', {
           body: data,
           method: 'POST'
         }).then((res) => res.json()).then(v => {
@@ -126,8 +127,8 @@ const CreateRecipe: React.FC<CreateRecipeType> = ({ categories }) => {
               </div>
             </div>
 
-            <div className="hero">
-              <div className="hero__photo">
+            <div className="hero row">
+              <div className="col s12 m6">
                 <p className="accentet">ваше фото</p>
                 {fileError && <p className="form-error">выбирите фото</p>}
                 {imageURI && <img className="hero__photo-img" src={imageURI} alt="your photo" />}
@@ -144,7 +145,7 @@ const CreateRecipe: React.FC<CreateRecipeType> = ({ categories }) => {
                   </div>
                 </div>
               </div>
-              <div className="hero__ingridients">
+              <div className="col s12 m6">
                 <p className="accentet">ингридиенты</p>
                 <FieldArray name="ingridiens">
                   {(arrayHelp) => (<div className="hero__ingridients-content">

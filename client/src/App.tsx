@@ -44,7 +44,7 @@ const App: React.FC<AppProps> = ({ isAuth, check, getCategories, userStatus }) =
   }, [])
 
   return (
-    <Suspense fallback={"loading..."}>
+    <Suspense fallback={" "}>
       <Bounder>
         <div className="app_layout">
           <Header isAuth={isAuth} />

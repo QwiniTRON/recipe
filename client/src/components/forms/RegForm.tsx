@@ -46,12 +46,12 @@ const RegForm: React.FC<RegFormProps> = (props) => {
             <div className="input-field col s12">
               <Field name="email" placeholder="email" id="email" type="email" className="validate" />
               <label htmlFor="email">login</label>
-              <span className="login-form__error"><ErrorMessage name="email" /></span>
+              <span className="form-error"><ErrorMessage name="email" /></span>
             </div>
             <div className="input-field col s12">
               <Field name="password" placeholder="password" id="password" type="password" className="validate" />
               <label htmlFor="password">password</label>
-              <span className="login-form__error"><ErrorMessage name="password" /></span>
+              <span className="form-error"><ErrorMessage name="password" /></span>
             </div>
             <div className="input-field col s12">
               <Field
@@ -66,12 +66,12 @@ const RegForm: React.FC<RegFormProps> = (props) => {
                   return error;
                 }} />
               <label htmlFor="rpassword">repeat password</label>
-              <span className="login-form__error"><ErrorMessage name="rpassword" /></span>
+              <span className="form-error"><ErrorMessage name="rpassword" /></span>
             </div>
             <div className="input-field col s12">
               <Field name="nickname" placeholder="nickname" id="nickname" type="text" className="validate" />
               <label htmlFor="nickname">nickname</label>
-              <span className="login-form__error"><ErrorMessage name="nickname" /></span>
+              <span className="form-error"><ErrorMessage name="nickname" /></span>
             </div>
             <div className="login-form__btns col s12">
               <button disabled={!formik.isValid} className="btn waves-effect waves-light" type="submit" name="action">

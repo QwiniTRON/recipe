@@ -1,6 +1,5 @@
 import express from 'express';
 import pgp from 'pg-promise';
-
 import db from '../db/connect';
 
 
@@ -300,4 +299,11 @@ export type ShortRecipe = {
   category_id: number,
   author_id: number,
   creat_date: string
+}
+
+export const recipeFiltersDictionary = {
+  'dated': 'dated',
+  'dateu': 'dateu',
+  'named': 'named',
+  'nameu': 'nameu'
 }

@@ -95,9 +95,9 @@ const EditRecipe: React.FC<EditRecipeType> = ({ categories, ...props }) => {
         }
         values.ingridiens.forEach(ing => data.append('ingridiens', ing));
 
-        fetch('/api/recipe/edit/' + recipeId, {
+        fetch('/api/recipe/' + recipeId, {
           body: data,
-          method: 'POST'
+          method: 'put'
         }).then((res) => res.json()).then(v => {
           if (v.ok) {
             (window as any).M.toast({ html: 'Рецепт изменён.', classes: 'green' });
@@ -157,8 +157,8 @@ const EditRecipe: React.FC<EditRecipeType> = ({ categories, ...props }) => {
               </div>
             </div>
 
-            <div className="hero">
-              <div className="hero__photo">
+            <div className="hero row">
+              <div className="col s12 m6">
                 <p className="accentet">ваше фото</p>
                 {fileError && <p className="form-error">выбирите фото</p>}
                 {imageURI && <img className="hero__photo-img" src={imageURI} alt="your photo" />}
@@ -176,7 +176,7 @@ const EditRecipe: React.FC<EditRecipeType> = ({ categories, ...props }) => {
                   </div>
                 </div>
               </div>
-              <div className="hero__ingridients">
+              <div className="col s12 m6">
                 <p className="accentet">ингридиенты</p>
                 <FieldArray name="ingridiens">
                   {(arrayHelp) => (<div className="hero__ingridients-content">

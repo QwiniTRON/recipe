@@ -24,8 +24,8 @@ const Header: React.FC<HeaderProps> = ({ isAuth, categories, nickname, userStatu
   const sideNavRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
-    var elem: HTMLUListElement = document.querySelector('.sidenav') as HTMLUListElement;
-    (sideNavRef as any).current = (window as any).M.Sidenav.init(elem);
+      var elem: HTMLUListElement = document.querySelector('.sidenav') as HTMLUListElement;
+      (sideNavRef as any).current = (window as any)?.M?.Sidenav?.init(elem);
   }, []);
 
   const closeSideMenu = () => {

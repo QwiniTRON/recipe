@@ -38,12 +38,12 @@ const LoginForm: React.FC<LoginFormProps> = ({submitHandle, isLoading}) => {
             <div className="input-field col s12">
               <Field name="email" placeholder="email" id="email" type="email" className="validate" />
               <label htmlFor="email">login</label>
-              <span className="login-form__error"><ErrorMessage name="email" /></span>
+              <span className="form-error"><ErrorMessage name="email" /></span>
             </div>
             <div className="input-field col s12">
               <Field name="password" placeholder="password" id="password" type="password" className="validate" />
               <label htmlFor="password">password</label>
-              <span className="login-form__error"><ErrorMessage name="password" /></span>
+              <span className="form-error"><ErrorMessage name="password" /></span>
             </div>
             <div className="login-form__btns col s12">
               <button disabled={!formik.isValid || isLoading} className="btn waves-effect waves-light" type="submit" name="action">

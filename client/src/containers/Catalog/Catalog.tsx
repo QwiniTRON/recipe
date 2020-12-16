@@ -13,9 +13,11 @@ import { Loader } from '../../components/UI/Loader/Loader';
 import { BreadCramps } from '../../components/BreadCramps/BreadCramps';
 
 
+
 type CatalogRouteProps = {
   categoryid?: string
 }
+
 
 interface CatalogProps extends RouteComponentProps<CatalogRouteProps> {
   filter: string
@@ -31,6 +33,7 @@ interface CatalogProps extends RouteComponentProps<CatalogRouteProps> {
   getRecipesBack: Function
 }
 
+
 const Catalog: React.FC<CatalogProps> = ({
   filter,
   recipeSetFilter,
@@ -40,6 +43,7 @@ const Catalog: React.FC<CatalogProps> = ({
   const [search, setSearch] = useState('');
   const searchRef = useRef<HTMLInputElement>(null);
   const sideNavRef = useRef<any>(null);
+
 
   // функция добавления в url информации для поиска, также перезагружает компонент.
   // и он ищет рецепты с новыми параметрами.
@@ -53,6 +57,7 @@ const Catalog: React.FC<CatalogProps> = ({
 
     props.history.push(str);
   }
+
 
   const category: string | undefined = props.match.params.categoryid;
   useLayoutEffect(() => {
@@ -71,6 +76,7 @@ const Catalog: React.FC<CatalogProps> = ({
     if (filter) recipeSetFilter(filter)
     if (search) setSearch(search)
   }, []);
+
 
   // запрашиваем рецепты. 
   useEffect(() => {
@@ -91,8 +97,8 @@ const Catalog: React.FC<CatalogProps> = ({
           <select value={filter} onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
             recipeSetFilter(e.target.value);
           }}>
-            <option value="dated">сначала новые</option>
-            <option value="dateu">сначала старые</option>
+            <option value="dateu">сначала новые</option>
+            <option value="dated">сначала старые</option>
             <option value="named">по алфавиту</option>
             <option value="nameu">по алфавиту в обратную</option>
           </select>
@@ -177,6 +183,7 @@ const Catalog: React.FC<CatalogProps> = ({
   );
 }
 
+
 const mapStateToProps = (state: RootState) => ({
   filter: state.recipe.filter,
   categories: state.recipe.categories,
@@ -191,6 +198,7 @@ const mapDispatchToProps = {
   getRecipesNext,
   getRecipesBack
 }
+
 
 const connectedCatalog = connect(mapStateToProps, mapDispatchToProps)(Catalog);
 export { connectedCatalog as Catalog };

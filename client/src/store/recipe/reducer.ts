@@ -40,7 +40,7 @@ const initialState = {
   categories: [],
   recipes: [],
   loading: false,
-  filter: 'dated',
+  filter: 'dateu',
   step: 0,
   recipesCount: 0,
   oneRecipe: null

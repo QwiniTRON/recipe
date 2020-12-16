@@ -49,7 +49,7 @@ const Auth: React.FC<AuthType> = (props) => {
         )
       }
 
-      <button onClick={e => setIsLoginForm(!isLoginForm)} className="btn waves-effect waves-light" type="button">
+      <button onClick={e => setIsLoginForm(!isLoginForm)} className="btn waves-effect waves-light authPage__toggler" type="button">
         {isLoginForm ? "регистрация" : "авторизация"} &gt;
       </button>
     </div>

@@ -46,7 +46,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteComment = exports.deleteRecipe = exports.getCommentById = exports.getCommentsForRecipe = exports.createCommentToRecipe = exports.editRecipe = exports.createRecipe = exports.getOneRecipe = exports.getShortRecipeById = exports.getCategoryes = exports.hasCategoyById = exports.getAllRecipes = exports.editCategory = exports.createCategory = void 0;
+exports.recipeFiltersDictionary = exports.deleteComment = exports.deleteRecipe = exports.getCommentById = exports.getCommentsForRecipe = exports.createCommentToRecipe = exports.editRecipe = exports.createRecipe = exports.getOneRecipe = exports.getShortRecipeById = exports.getCategoryes = exports.hasCategoyById = exports.getAllRecipes = exports.editCategory = exports.createCategory = void 0;
 var connect_1 = __importDefault(require("../db/connect"));
 function createCategory(name, description) {
     var queryString = "\n    insert into category(name, description)\n    values \n    ($1, $2)\n  ";
@@ -293,3 +293,9 @@ function deleteComment(commentId) {
     }
 }
 exports.deleteComment = deleteComment;
+exports.recipeFiltersDictionary = {
+    'dated': 'dated',
+    'dateu': 'dateu',
+    'named': 'named',
+    'nameu': 'nameu'
+};

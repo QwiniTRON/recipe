@@ -1,34 +1,16 @@
 .create-page {
   padding-top: 5px;
 
-
-  .hero {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .hero__ingridients, .hero__photo {
-    flex-grow: 1;
-  }
-  .hero__photo {
-    margin-right: 10px;
-  }
-  .hero__photo-img {
+  img.hero__photo-img {
     max-width: 100%;
   }
 
-  .hero__ingridients-ingridients {
+  .hero .hero__ingridients-ingridients {
     display: flex;
 
     button {
       margin-left: 10px;
-    }
-  }
-}
-
-@media (max-width: 654px) {
-  .create-page {
-    .hero__ingridients, .hero__photo {
-      width: 100%;
+      margin-top: 7px;
     }
   }
 }

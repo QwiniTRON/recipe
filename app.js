@@ -12,6 +12,8 @@ var connect_1 = __importDefault(require("./db/connect"));
 var cookieParser = require('cookie-parser');
 var user_1 = require("./routes/user");
 var recipe_1 = require("./routes/recipe");
+var categories_1 = require("./routes/categories");
+var comment_1 = require("./routes/comment");
 var app = express_1.default();
 app.use('/imgs', express_1.default.static(path_1.default.resolve(__dirname, 'imgs')));
 app.use(express_1.default.json());
@@ -37,6 +39,8 @@ app.use(passport_1.default.session());
 // routes
 app.use('/api/auth', user_1.userRouter);
 app.use('/api/recipe', recipe_1.recipeRpouter);
+app.use('/api/category', categories_1.categoryRouter);
+app.use('/api/comment', comment_1.commentRouter);
 // отдача клиента
 app.use("/", express_1.default.static(path_1.default.join(__dirname, 'client', 'build')));
 app.get("*", function (req, res) {

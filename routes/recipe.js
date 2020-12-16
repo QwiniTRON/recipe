@@ -50,48 +50,18 @@ var recipe_1 = require("../models/recipe");
 var adminCheck_1 = require("../midleware/adminCheck");
 var router = express_1.default.Router();
 exports.recipeRpouter = router;
-// Get
-router.get('/categories', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var categories, err_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, recipe_1.getCategoryes()];
-            case 1:
-                categories = _a.sent();
-                res.json({
-                    ok: true,
-                    categories: categories
-                });
-                return [3 /*break*/, 3];
-            case 2:
-                err_1 = _a.sent();
-                console.log(err_1);
-                res.json({
-                    ok: false
-                });
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
-        }
-    });
-}); });
-var recipeFilters = {
-    'dated': 'dated',
-    'dateu': 'dateu',
-    'named': 'named',
-    'nameu': 'nameu'
-};
-router.get('/all', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, _b, offset, _c, limit, search, category_id, filter, foundRecipes, err_2;
+// get
+router.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, _b, offset, _c, limit, search, filter, parsedFilter, foundRecipes, err_1;
     return __generator(this, function (_d) {
         switch (_d.label) {
             case 0:
-                _a = req.query, _b = _a.offset, offset = _b === void 0 ? 0 : _b, _c = _a.limit, limit = _c === void 0 ? 4 : _c, search = _a.search, category_id = _a.category_id, filter = _a.filter;
+                _a = req.query, _b = _a.offset, offset = _b === void 0 ? 0 : _b, _c = _a.limit, limit = _c === void 0 ? 4 : _c, search = _a.search, filter = _a.filter;
+                parsedFilter = JSON.parse(filter || '{}');
                 _d.label = 1;
             case 1:
                 _d.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, recipe_1.getAllRecipes(+offset, +limit, filter, search, Number(category_id))];
+                return [4 /*yield*/, recipe_1.getAllRecipes(+offset, +limit, parsedFilter.filter, search, Number(parsedFilter.category_id))];
             case 2:
                 foundRecipes = _d.sent();
                 res.json({
@@ -101,8 +71,8 @@ router.get('/all', function (req, res) { return __awaiter(void 0, void 0, void 0
                 });
                 return [3 /*break*/, 4];
             case 3:
-                err_2 = _d.sent();
-                console.log(err_2);
+                err_1 = _d.sent();
+                console.log(err_1);
                 res.json({
                     ok: false,
                     recipes: [],
@@ -113,8 +83,9 @@ router.get('/all', function (req, res) { return __awaiter(void 0, void 0, void 0
         }
     });
 }); });
-router.get('/one/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var recipeId, reicpeData, err_3;
+// get one
+router.get('/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var recipeId, reicpeData, err_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -142,8 +113,8 @@ router.get('/one/:id', function (req, res) { return __awaiter(void 0, void 0, vo
                 }
                 return [3 /*break*/, 4];
             case 3:
-                err_3 = _a.sent();
-                console.log(err_3);
+                err_2 = _a.sent();
+                console.log(err_2);
                 res.json({
                     ok: false
                 });
@@ -152,8 +123,8 @@ router.get('/one/:id', function (req, res) { return __awaiter(void 0, void 0, vo
         }
     });
 }); });
-// post 
-router.post('/create', multerConfig_1.upload.any(), validators_1.recipeValidator, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+// create one 
+router.post('/', multerConfig_1.upload.any(), validators_1.recipeValidator, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var reqErrors, photoInfo, _a, title, description, category, ingridiens, createReq;
     return __generator(this, function (_b) {
         switch (_b.label) {
@@ -191,8 +162,9 @@ router.post('/create', multerConfig_1.upload.any(), validators_1.recipeValidator
         }
     });
 }); });
-router.post('/edit/:id', multerConfig_1.upload.any(), validators_1.recipeValidator, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var reqErrors, photoInfo, recipeId, _a, title, description, category, ingridiens, oldPath, photoPath, err_4;
+// update one
+router.put('/:id', multerConfig_1.upload.any(), validators_1.recipeValidator, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var reqErrors, photoInfo, recipeId, _a, title, description, category, ingridiens, oldPath, photoPath, err_3;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -220,14 +192,12 @@ router.post('/edit/:id', multerConfig_1.upload.any(), validators_1.recipeValidat
             case 2:
                 _b.sent();
                 if (oldPath && photoInfo) {
-                    fs_1.default.unlink(path_1.default.resolve(__dirname, '..', 'imgs', oldPath), function (err) {
-                        console.log(err, 'err unlink');
-                    });
+                    fs_1.default.unlink(path_1.default.resolve(__dirname, '..', 'imgs', oldPath), function (err) { });
                 }
                 return [3 /*break*/, 4];
             case 3:
-                err_4 = _b.sent();
-                console.log(err_4);
+                err_3 = _b.sent();
+                console.log(err_3);
                 return [2 /*return*/, res.json({
                         ok: false
                     })];
@@ -239,49 +209,13 @@ router.post('/edit/:id', multerConfig_1.upload.any(), validators_1.recipeValidat
         }
     });
 }); });
-router.post('/comment', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, text, recipeId, createReq, err_5;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                if (!req.user)
-                    return [2 /*return*/, res.json({
-                            ok: false,
-                            message: 'none authorized'
-                        })];
-                _a = req.body, text = _a.text, recipeId = _a.recipeId;
-                if (text.trim().length < 6)
-                    return [2 /*return*/, res.json({
-                            ok: false,
-                            message: 'короткий комментарий'
-                        })];
-                _b.label = 1;
-            case 1:
-                _b.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, recipe_1.createCommentToRecipe(String(req.user.id), recipeId, text)];
-            case 2:
-                createReq = _b.sent();
-                res.json({
-                    ok: true,
-                    comment: createReq
-                });
-                return [3 /*break*/, 4];
-            case 3:
-                err_5 = _b.sent();
-                return [2 /*return*/, res.json({
-                        ok: false,
-                        message: 'some error'
-                    })];
-            case 4: return [2 /*return*/];
-        }
-    });
-}); });
-router.post('/delete/recipe', adminCheck_1.checkAdmin, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var recipeId, recipe, deleteReq, err_6;
+// delete one
+router.delete('/:id', adminCheck_1.checkAdmin, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var recipeId, recipe, deleteReq, err_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                recipeId = req.body.recipeId;
+                recipeId = req.params.id;
                 if (!recipeId) {
                     return [2 /*return*/, res.json({
                             ok: false,
@@ -309,122 +243,12 @@ router.post('/delete/recipe', adminCheck_1.checkAdmin, function (req, res) { ret
                 });
                 return [3 /*break*/, 5];
             case 4:
-                err_6 = _a.sent();
+                err_4 = _a.sent();
                 res.json({
                     ok: false
                 });
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
-        }
-    });
-}); });
-router.post('/delete/comment', adminCheck_1.checkAdmin, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var commentId, deleteReq, err_7;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                commentId = req.body.commentId;
-                if (!commentId) {
-                    return [2 /*return*/, res.json({
-                            ok: false,
-                            message: 'нет id'
-                        })];
-                }
-                _a.label = 1;
-            case 1:
-                _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, recipe_1.deleteComment(commentId)];
-            case 2:
-                deleteReq = _a.sent();
-                res.json({
-                    ok: true,
-                    commentId: commentId
-                });
-                return [3 /*break*/, 4];
-            case 3:
-                err_7 = _a.sent();
-                res.json({
-                    ok: false
-                });
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
-        }
-    });
-}); });
-router.post('/category/create', adminCheck_1.checkAdmin, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name, description, err_8;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                _a = req.body, name = _a.name, description = _a.description;
-                if (name.length < 3) {
-                    return [2 /*return*/, res.json({
-                            ok: false
-                        })];
-                }
-                if (description.length < 6) {
-                    return [2 /*return*/, res.json({
-                            ok: false
-                        })];
-                }
-                _b.label = 1;
-            case 1:
-                _b.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, recipe_1.createCategory(name, description)];
-            case 2:
-                _b.sent();
-                res.json({
-                    ok: true
-                });
-                return [3 /*break*/, 4];
-            case 3:
-                err_8 = _b.sent();
-                res.json({
-                    ok: false
-                });
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
-        }
-    });
-}); });
-router.post('/category/edit', adminCheck_1.checkAdmin, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name, description, categoryId, err_9;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                _a = req.body, name = _a.name, description = _a.description, categoryId = _a.categoryId;
-                if (name.length < 3) {
-                    return [2 /*return*/, res.json({
-                            ok: false
-                        })];
-                }
-                if (description.length < 6) {
-                    return [2 /*return*/, res.json({
-                            ok: false
-                        })];
-                }
-                if (!categoryId) {
-                    return [2 /*return*/, res.json({
-                            ok: false
-                        })];
-                }
-                _b.label = 1;
-            case 1:
-                _b.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, recipe_1.editCategory(name, description, categoryId)];
-            case 2:
-                _b.sent();
-                res.json({
-                    ok: true
-                });
-                return [3 /*break*/, 4];
-            case 3:
-                err_9 = _b.sent();
-                res.json({
-                    ok: false
-                });
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
         }
     });
 }); });

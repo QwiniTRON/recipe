@@ -7,6 +7,8 @@ import db from './db/connect';
 const cookieParser = require('cookie-parser');
 import { userRouter } from './routes/user';
 import { recipeRpouter } from './routes/recipe';
+import { categoryRouter } from './routes/categories';
+import { commentRouter } from './routes/comment';
 
 
 const app: express.Application = express();
@@ -38,6 +40,9 @@ app.use(passport.session());
 // routes
 app.use('/api/auth', userRouter);
 app.use('/api/recipe', recipeRpouter);
+app.use('/api/category', categoryRouter);
+app.use('/api/comment', commentRouter);
+
 
 // отдача клиента
 app.use("/", express.static(path.join(__dirname, 'client', 'build')));
@@ -49,6 +54,7 @@ app.use(function (err: any, req: express.Request, res: express.Response, next: F
   console.error(err);
   res.status(500).send('Something broke!');
 });
+
 
 
 app.listen(keys.PORT, () => {

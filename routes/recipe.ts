@@ -5,55 +5,29 @@ import { recipeValidator } from '../utils/validators';
 import { validationResult } from 'express-validator';
 import path from 'path';
 import {
-  getCategoryes,
-  Category,
   createRecipe,
   getAllRecipes,
   getOneRecipe,
-  createCommentToRecipe,
-  deleteComment,
   deleteRecipe,
   getShortRecipeById,
   ShortRecipe,
   editRecipe,
-  createCategory,
-  editCategory
+  recipeFiltersDictionary as recipeFilters
 } from '../models/recipe';
-import { User } from '../models/user';
 import { checkAdmin } from '../midleware/adminCheck';
+
+
 
 const router = express.Router();
 
-// Get
-router.get('/categories', async (req: express.Request, res: express.Response) => {
-  try {
-    const categories: Category[] = await getCategoryes();
 
-    res.json({
-      ok: true,
-      categories: categories
-    });
-  } catch (err) {
-    console.log(err);
-
-    res.json({
-      ok: false
-    });
-  }
-});
-
-
-const recipeFilters = {
-  'dated': 'dated',
-  'dateu': 'dateu',
-  'named': 'named',
-  'nameu': 'nameu'
-}
-router.get('/all', async (req: express.Request, res: express.Response) => {
-  const { offset = 0, limit = 4, search, category_id, filter } = req.query;
+// get
+router.get('/', async (req: express.Request, res: express.Response) => {
+  const { offset = 0, limit = 4, search, filter } = req.query;
+  const parsedFilter = JSON.parse((filter as string) || '{}');
 
   try {
-    const foundRecipes = await getAllRecipes(+offset, +limit, filter as string, search as string, Number(category_id));
+    const foundRecipes = await getAllRecipes(+offset, +limit, parsedFilter.filter as string, search as string, Number(parsedFilter.category_id));
 
     res.json({
       ok: true,
@@ -71,7 +45,9 @@ router.get('/all', async (req: express.Request, res: express.Response) => {
   }
 });
 
-router.get('/one/:id', async (req: express.Request, res: express.Response) => {
+
+// get one
+router.get('/:id', async (req: express.Request, res: express.Response) => {
   const recipeId = req.params.id;
 
   if (!recipeId) return res.json({
@@ -99,8 +75,9 @@ router.get('/one/:id', async (req: express.Request, res: express.Response) => {
   }
 });
 
-// post 
-router.post('/create', upload.any(), recipeValidator, async (req: express.Request, res: express.Response) => {
+
+// create one 
+router.post('/', upload.any(), recipeValidator, async (req: express.Request, res: express.Response) => {
   const reqErrors = validationResult(req);
   if (!reqErrors.isEmpty()) {
     // на случай если с созданием произошла ошибка, просто удаляем фото
@@ -139,7 +116,9 @@ router.post('/create', upload.any(), recipeValidator, async (req: express.Reques
   });
 });
 
-router.post('/edit/:id', upload.any(), recipeValidator, async (req: express.Request, res: express.Response) => {
+
+// update one
+router.put('/:id', upload.any(), recipeValidator, async (req: express.Request, res: express.Response) => {
   const reqErrors = validationResult(req);
   if (!reqErrors.isEmpty()) {
     // на случай если с созданием произошла ошибка, просто удаляем фото
@@ -165,9 +144,7 @@ router.post('/edit/:id', upload.any(), recipeValidator, async (req: express.Requ
 
     await editRecipe(recipeId, title, description, category, photoPath, ingridiens);
     if (oldPath && photoInfo) {
-      fs.unlink(path.resolve(__dirname, '..', 'imgs', oldPath), (err) => {
-        console.log(err, 'err unlink');
-      });
+      fs.unlink(path.resolve(__dirname, '..', 'imgs', oldPath), (err) => { });
     }
   } catch (err) {
     console.log(err);
@@ -182,34 +159,10 @@ router.post('/edit/:id', upload.any(), recipeValidator, async (req: express.Requ
   });
 });
 
-router.post('/comment', async (req: express.Request, res: express.Response) => {
-  if (!req.user) return res.json({
-    ok: false,
-    message: 'none authorized'
-  });
-  const { text, recipeId } = req.body;
 
-  if (text.trim().length < 6) return res.json({
-    ok: false,
-    message: 'короткий комментарий'
-  });
-
-  try {
-    const createReq = await createCommentToRecipe(String((req.user as User).id), recipeId, text);
-    res.json({
-      ok: true,
-      comment: createReq
-    });
-  } catch (err) {
-    return res.json({
-      ok: false,
-      message: 'some error'
-    });
-  }
-});
-
-router.post('/delete/recipe', checkAdmin, async (req: express.Request, res: express.Response) => {
-  const { recipeId } = req.body;
+// delete one
+router.delete('/:id', checkAdmin, async (req: express.Request, res: express.Response) => {
+  const { id: recipeId } = req.params;
 
   if (!recipeId) {
     return res.json({
@@ -239,88 +192,5 @@ router.post('/delete/recipe', checkAdmin, async (req: express.Request, res: expr
   }
 });
 
-router.post('/delete/comment', checkAdmin, async (req: express.Request, res: express.Response) => {
-  const { commentId } = req.body;
-
-  if (!commentId) {
-    return res.json({
-      ok: false,
-      message: 'нет id'
-    });
-  }
-
-  try {
-    const deleteReq = await deleteComment(commentId);
-
-    res.json({
-      ok: true,
-      commentId
-    });
-  } catch (err) {
-    res.json({
-      ok: false
-    });
-  }
-});
-
-router.post('/category/create', checkAdmin, async (req: express.Request, res: express.Response) => {
-  const { name, description } = req.body;
-
-  if (name.length < 3) {
-    return res.json({
-      ok: false
-    });
-  }
-
-  if (description.length < 6) {
-    return res.json({
-      ok: false
-    });
-  }
-
-  try {
-    await createCategory(name, description);
-    res.json({
-      ok: true
-    });
-  } catch (err) {
-    res.json({
-      ok: false
-    });
-  }
-});
-
-router.post('/category/edit', checkAdmin, async (req: express.Request, res: express.Response) => {
-  const { name, description, categoryId } = req.body;
-
-  if (name.length < 3) {
-    return res.json({
-      ok: false
-    });
-  }
-
-  if (description.length < 6) {
-    return res.json({
-      ok: false
-    });
-  }
-
-  if (!categoryId) {
-    return res.json({
-      ok: false
-    });
-  }
-
-  try {
-    await editCategory(name, description, categoryId);
-    res.json({
-      ok: true
-    });
-  } catch (err) {
-    res.json({
-      ok: false
-    });
-  }
-});
 
 export { router as recipeRpouter };

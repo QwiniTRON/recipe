@@ -1,0 +1,16 @@
+.create-page {
+  padding-top: 5px;
+
+  img.hero__photo-img {
+    max-width: 100%;
+  }
+
+  .hero .hero__ingridients-ingridients {
+    display: flex;
+
+    button {
+      margin-left: 10px;
+      margin-top: 7px;
+    }
+  }
+}

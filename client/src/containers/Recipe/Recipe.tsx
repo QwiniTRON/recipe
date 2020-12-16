@@ -49,7 +49,7 @@ const Recipe: React.FC<RecipeProps> = (props) => {
   );
 
   return (
-    <div className="recipe-page">
+    <div className="recipe-page container">
       <h3 className="title">
         {props.recipe?.recipe.name}
       </h3>

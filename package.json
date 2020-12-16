@@ -10,8 +10,8 @@
     "client:build": "npm run build --prefix client",
     "client:install": "npm install --prefix client",
     "server:install": "npm install",
-    "all:install": "concurrently \"server:install\" \"client:install\"",
-    "start": "concurrently \"server:dev\" \"client\""
+    "all:install": "concurrently \"npm run server:install\" \"npm run client:install\"",
+    "start": "concurrently \"npm run server:dev\" \"npm run client\""
   },
   "keywords": [],
   "author": "",

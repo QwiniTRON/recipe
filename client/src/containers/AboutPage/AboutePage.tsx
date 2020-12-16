@@ -20,7 +20,7 @@ const AboutePage: React.FC = () => {
   }, [corusealRef.current]);
 
   return (
-    <div className="aboute-page">
+    <div className="aboute-page container">
       <BreadCramps />
       <h2>Сайт каталог рецептов</h2>
       <p>
