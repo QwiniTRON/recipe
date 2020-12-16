@@ -1,9 +1,6 @@
 FROM node:12.17.0-alpine
 
-ENV BUILD_PATH /usr/src/app
+WORKDIR /app
+COPY . .
 
-RUN mkdir -p $BUILD_PATH
-WORKDIR $BUILD_PATH
-COPY . $BUILD_PATH
-
-ENTRYPOINT ['node', 'app.js']
+ENTRYPOINT ["node", "app.js"]
