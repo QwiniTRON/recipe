@@ -20,6 +20,6 @@ services:
     image: postgres:12
     restart: always
     volumes: 
-     - ./volumes:/docker-entrypoint-initdb.d
+     - ./volumes/init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
      - POSTGRES_PASSWORD=postgres
