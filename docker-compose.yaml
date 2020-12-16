@@ -1,0 +1,25 @@
+version: "3.8"
+
+services: 
+  web:
+    build: .
+    ports:
+      - "4401:4401"
+    environment:
+      - PORT=4401
+      - NODE_ENV=production
+      - dbPort=5432
+      - dbName=postgres
+      - dbPassword=postgres
+      - secretKey=53sssaaa
+      - dbDatabse=curs
+    restart: always
+    links:
+     - postgres
+  postgres:
+    image: postgres:12
+    restart: always
+    volumes: 
+     - ./volumes:/var/lib/postgresql/data
+    environment:
+     - POSTGRES_PASSWORD=postgres
