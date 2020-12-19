@@ -7,9 +7,6 @@ const dbPassword = keys.dbPassword;
 const dbHost = process.env.IS_DOCKER? 'postgres' : keys.dbHost;
 const dbDatabase = keys.dbDatabse;
 
-console.log(process.env.dbTest);
-
-
 const pgp = pgPromise();
 const db = pgp(`postgres://${dbName}:${dbPassword}@${dbHost}:${dbPort}/${dbDatabase}`);
 
