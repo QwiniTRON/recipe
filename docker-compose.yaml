@@ -19,7 +19,7 @@ services:
      - postgres
 
   postgres:
-    image: postgres:12
+    image: postgres:9.4
     restart: always
     volumes:
      - ./volumes/init.sql:/docker-entrypoint-initdb.d/init.sql
