@@ -13,9 +13,11 @@ services:
       - dbPassword=postgres
       - secretKey=53sssaaa
       - dbDatabse=curs
+      - dbTest=postgres
     restart: always
     links:
      - postgres
+     
   postgres:
     image: postgres:12
     restart: always
