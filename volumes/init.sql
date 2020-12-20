@@ -23,7 +23,9 @@ SET row_security = off;
 -- Name: curs; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE IF NOT EXISTS DATABASE curs WITH ENCODING = 'UTF8';
+SELECT 'CREATE DATABASE curs'
+WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'curs');
+-- CREATE DATABASE IF NOT EXISTS curs WITH ENCODING = 'UTF8';
 
 
 ALTER DATABASE curs OWNER TO postgres;
