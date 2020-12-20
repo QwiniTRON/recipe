@@ -7,6 +7,7 @@
 
 -- Started on 2020-12-20 15:31:32
 
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -23,8 +24,7 @@ SET row_security = off;
 -- Name: curs; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE curs WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'Russian_Russia.1251' LC_CTYPE = 'Russian_Russia.1251';
-
+CREATE DATABASE curs;
 
 ALTER DATABASE curs OWNER TO postgres;
 
