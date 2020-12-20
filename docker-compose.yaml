@@ -20,6 +20,8 @@ services:
     restart: always
     links:
      - postgres
+    depends_on:
+     - postgres
 
   postgres:
     image: postgres:9.6.20-alpine
