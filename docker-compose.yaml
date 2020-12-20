@@ -1,5 +1,8 @@
 version: "3.8"
 
+volumes: 
+  dbdata
+
 services: 
   web:
     build: .
@@ -19,9 +22,10 @@ services:
      - postgres
 
   postgres:
-    image: postgres:9.4
+    image: postgres:9.6.20-alpine
     restart: always
     volumes:
-     - ./volumes/init.sql:/docker-entrypoint-initdb.d/init.sql
+     - ./volumes:/docker-entrypoint-initdb.d
+     - dbdata:/var/lib/postgresql/data
     environment:
      - POSTGRES_PASSWORD=postgres
