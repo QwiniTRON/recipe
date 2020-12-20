@@ -1,3 +1,25 @@
 статусы: 
  1 - статус админа
  2 - статус пользователя, по-умолчанию
+
+Установка:
+ • Через docker-compose
+	1) Скачиваем исходники проекта
+	2) Запускаем sudo docker-compose build
+	3) Запускаем sudo docker-compose up
+	4) Отменяем работу после прохождения всех логов - ctrl + c 
+	5) Запускаем Запускаем sudo docker-compose up
+	* При последующих включениях достаточно запускать sudo docker-compose up
+	* данные храняться в папке dbdata
+
+ • Через ручную установку
+ 	1) Скачиваем исходники проекта
+	2) В директории ./volumes есть файл init.sql - это Копия базы данных. Нужно зайти в свою СУБД и установить эту базу данных.
+	3) В главной диркетории проекта запускаем set NODE_ENV=production & set dbPort=5432 & set dbName=postgres & set PORT=4401 & dbPassword=123456789 & set dbHost=localhost & set secretKey=cursovaya & set dbDatabse=curs & node ./app.js
+	- dbPort - порт базы данных
+	- PORT - порт для вэб сервера
+	- dbPassword - пароль от пользователя базы данных
+	- NODE_ENV - режим работы приложения
+	- secretKey - код шифрования сессий
+	- dbDatabse - имя базы данных
+	- dbPort - порт базы данных
