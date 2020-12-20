@@ -18,7 +18,6 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
-DROP DATABASE curs;
 --
 -- TOC entry 2890 (class 1262 OID 16468)
 -- Name: curs; Type: DATABASE; Schema: -; Owner: postgres
