@@ -23,7 +23,7 @@ SET row_security = off;
 -- Name: curs; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE curs WITH ENCODING = 'UTF8';
+CREATE IF NOT EXISTS DATABASE curs WITH ENCODING = 'UTF8';
 
 
 ALTER DATABASE curs OWNER TO postgres;
