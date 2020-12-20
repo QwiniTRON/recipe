@@ -38,15 +38,16 @@ const Recipe: React.FC<RecipeProps> = (props) => {
     }
   }, []);
 
-  if (props.recipe == null) return (<div className="recipe-page">
-    рецепт удалён
-  </div>);
 
   if (props.loading) return (
     <div className="recipe-page">
       <Loader />
     </div>
   );
+
+  if (props.recipe == null) return (<div className="recipe-page">
+    рецепт удалён
+  </div>);
 
   return (
     <div className="recipe-page container">

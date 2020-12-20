@@ -11,7 +11,9 @@ var dbPassword = default_1.default.dbPassword;
 var dbHost = process.env.IS_DOCKER ? 'db' : default_1.default.dbHost;
 var dbDatabase = default_1.default.dbDatabse;
 var connectString = "postgres://" + dbName + ":" + dbPassword + "@" + dbHost + ":" + dbPort + "/" + dbDatabase;
-console.log('DATABASE STRING ' + connectString);
+if (process.env.NODE_ENV === 'production') {
+    console.log('DATABASE STRING ' + connectString);
+}
 var pgp = pg_promise_1.default();
 var db = pgp(connectString);
 exports.default = db;
