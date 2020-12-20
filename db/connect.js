@@ -8,7 +8,7 @@ var pg_promise_1 = __importDefault(require("pg-promise"));
 var dbPort = default_1.default.dbPort;
 var dbName = default_1.default.dbName;
 var dbPassword = default_1.default.dbPassword;
-var dbHost = process.env.IS_DOCKER ? 'postgres' : default_1.default.dbHost;
+var dbHost = process.env.IS_DOCKER ? 'db' : default_1.default.dbHost;
 var dbDatabase = default_1.default.dbDatabse;
 var connectString = "postgres://" + dbName + ":" + dbPassword + "@" + dbHost + ":" + dbPort + "/" + dbDatabase;
 console.log('DATABASE STRING ' + connectString);

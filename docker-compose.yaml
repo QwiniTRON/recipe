@@ -19,7 +19,7 @@ services:
       - IS_DOCKER=true
     restart: always
     links:
-     - postgres
+     - postgres:db
     depends_on:
      - postgres
 
