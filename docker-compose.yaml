@@ -27,7 +27,7 @@ services:
     image: postgres:9.6.20-alpine
     restart: always
     volumes:
-     - ./volumes:/docker-entrypoint-initdb.d
+     - ./volumes/init.sql:/docker-entrypoint-initdb.d/init.sql
      - dbdata:/var/lib/postgresql/data
     environment:
      - POSTGRES_PASSWORD=postgres
