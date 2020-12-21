@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.registerValidator = exports.recipeValidator = exports.loginValidator = void 0;
 var express_validator_1 = require("express-validator");
 var user_1 = require("../models/user");
-var recipe_1 = require("../models/recipe");
+var category_1 = require("../models/category");
 exports.loginValidator = [
     express_validator_1.body('email', 'email не по формату')
         .trim()
@@ -25,11 +25,11 @@ exports.recipeValidator = [
         .isLength({ min: 15, max: 2000 }),
     express_validator_1.body('category', 'нет такой категории')
         .custom(function (value) { return new Promise(function (resolve, reject) {
-        recipe_1.hasCategoyById(+value).then(function (isExists) {
+        category_1.CategoryModel.hasCategoyById(+value).then(function (isExists) {
             if (!isExists)
                 reject();
             else
-                resolve();
+                resolve(isExists);
         });
     }); }),
     express_validator_1.body('ingridiens', 'ингридиенты не по формату')
@@ -53,7 +53,7 @@ exports.registerValidator = [
             if (isExists)
                 reject();
             else
-                resolve();
+                resolve(isExists);
         });
     }); }).withMessage('такой email уже зарегистрирован'),
     express_validator_1.body('password')
@@ -72,7 +72,7 @@ exports.registerValidator = [
             if (isExists)
                 reject();
             else
-                resolve();
+                resolve(isExists);
         });
     }); }).withMessage('такой ник уже есть')
 ];

@@ -36,6 +36,7 @@ app.use(express_session_1.default({
 require('./routes/passportConfig');
 app.use(passport_1.default.initialize());
 app.use(passport_1.default.session());
+console.log(process.env);
 // routes
 app.use('/api/auth', user_1.userRouter);
 app.use('/api/recipe', recipe_1.recipeRpouter);

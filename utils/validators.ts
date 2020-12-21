@@ -1,6 +1,6 @@
 import { body } from 'express-validator';
 import { isExistsEmail, isExistsNickname } from '../models/user';
-import { hasCategoyById } from '../models/recipe';
+import { CategoryModel } from '../models/category';
 
 export const loginValidator = [
   body('email', 'email не по формату')
@@ -27,9 +27,9 @@ export const recipeValidator = [
 
   body('category', 'нет такой категории')
     .custom((value: string) => new Promise((resolve, reject) => {
-      hasCategoyById(+value).then(isExists => {
+      CategoryModel.hasCategoyById(+value).then((isExists: boolean) => {
         if (!isExists) reject();
-        else resolve();
+        else resolve(isExists);
       })
     })),
 
@@ -53,7 +53,7 @@ export const registerValidator = [
     .custom(value => new Promise((resolve, reject) => {
       isExistsEmail(value).then((isExists) => {
         if (isExists) reject();
-        else resolve();
+        else resolve(isExists);
       })
     })).withMessage('такой email уже зарегистрирован'),
 
@@ -72,7 +72,7 @@ export const registerValidator = [
     .custom(value => new Promise((resolve, reject) => {
       isExistsNickname(value).then((isExists) => {
         if (isExists) reject();
-        else resolve();
+        else resolve(isExists);
       })
     })).withMessage('такой ник уже есть')
 ];

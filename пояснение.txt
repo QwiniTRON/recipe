@@ -15,7 +15,7 @@
  • Через ручную установку
  	1) Скачиваем исходники проекта
 	2) В директории ./volumes есть файл init.sql - это Копия базы данных. Нужно зайти в свою СУБД и установить эту базу данных.
-	3) В главной диркетории проекта запускаем set NODE_ENV=production & set dbPort=5432 & set dbName=postgres & set PORT=4401 & dbPassword=123456789 & set dbHost=localhost & set secretKey=cursovaya & set dbDatabse=curs & node ./app.js
+	3) В главной диркетории проекта запускаем команду set NODE_ENV=production & set dbPort=5432 & set dbName=postgres & set PORT=4401 & set dbPassword=123456789 & set dbHost=localhost & set secretKey=cursovaya & set dbDatabse=curs & node ./app.js
 	- dbPort - порт базы данных
 	- PORT - порт для вэб сервера
 	- dbPassword - пароль от пользователя базы данных
