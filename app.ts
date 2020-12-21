@@ -36,8 +36,6 @@ require('./routes/passportConfig');
 app.use(passport.initialize());
 app.use(passport.session());
 
-console.log(process.env);
-
 // routes
 app.use('/api/auth', userRouter);
 app.use('/api/recipe', recipeRpouter);
