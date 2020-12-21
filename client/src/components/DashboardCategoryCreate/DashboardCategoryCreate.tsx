@@ -13,7 +13,7 @@ export const DashboardCategoryCreate: React.FC = () => {
   const [desc, setDesc] = useState('');
 
   const editClick = async () => {
-    const createReq = await Req.post('/api/recipe/category/create', {
+    const createReq = await Req.post('/api/category/', {
       name: name.trim(), 
       description: desc.trim()
     });

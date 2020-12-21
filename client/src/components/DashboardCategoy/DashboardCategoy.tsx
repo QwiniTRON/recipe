@@ -38,7 +38,7 @@ export const DashboardCategoy: React.FC<DashboardCategoyProps> = (props) => {
   );
 
   const editClick = async () => {
-    const editReq = await Req.post('/api/recipe/category/edit', {
+    const editReq = await Req.put('/api/category/', {
       name: name.trim(),
       description: desc.trim(),
       categoryId: id
