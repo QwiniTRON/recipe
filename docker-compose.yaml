@@ -14,7 +14,7 @@ services:
       - dbPassword=postgres
       - secretKey=53sssaaa
       - dbDatabse=curs
-      - IS_DOCKER=true
+      - dbHost=db
     restart: always
     links:
      - postgres:db
